@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Augusto Magalhães | Portfólio</title>
+  <meta name="description" content="Portfólio de Augusto Magalhães, estudante de Análise e Desenvolvimento de Sistemas.">
+
+  <!-- Fonte do Google Fonts (se não carregar, usa a fonte padrão do sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       1. CORES E CONFIGURAÇÕES GERAIS
+       Para mudar o visual do site, edite as cores abaixo.
+       Quer roxo em vez de azul? Troque --destaque por #8b5cf6
+       ========================================================= */
+    :root {
+      --fundo: #05070d;          /* fundo da página */
+      --fundo-card: #0d1220;     /* fundo dos cards */
+      --borda: #1c2540;          /* linhas e bordas */
+      --texto: #e8ecf5;          /* texto principal */
+      --texto-suave: #98a2bd;    /* texto secundário */
+      --destaque: #3b82f6;       /* azul de destaque */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }  /* rolagem suave entre seções */
+
+    body {
+      font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Foco visível para quem navega pelo teclado */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--destaque);
+      outline-offset: 3px;
+    }
+
+    /* Container: centraliza o conteúdo e limita a largura */
+    .container { width: min(1000px, 90%); margin: 0 auto; }
+
+    /* Cada seção tem o mesmo espaçamento */
+    .secao { padding: 5rem 0; }
+    .secao h2 { font-size: 1.8rem; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+
+    /* =========================================================
+       2. MENU DE NAVEGAÇÃO
+       ========================================================= */
+    .menu {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(5, 7, 13, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--borda);
+    }
+    .menu .container {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 0;
+    }
+    .menu .logo { font-weight: 800; }
+    .menu ul { display: flex; gap: 1.4rem; list-style: none; }
+    .menu ul a { color: var(--texto-suave); font-size: 0.95rem; transition: color .2s; }
+    .menu ul a:hover { color: var(--texto); }
+
+    /* =========================================================
+       3. CABEÇALHO (HERO)
+       ========================================================= */
+    .hero { padding: 7rem 0 5rem; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .hero .titulo { margin-top: 1rem; font-size: 1.25rem; color: var(--destaque); font-weight: 700; }
+    .hero .descricao { margin-top: 1.2rem; max-width: 60ch; color: var(--texto-suave); font-size: 1.1rem; }
+    .hero .botoes { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Animação de entrada: acontece só uma vez, ao abrir o site */
+    .hero .container { animation: entrada .8s ease both; }
+    @keyframes entrada { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+    /* =========================================================
+       4. BOTÕES
+       ========================================================= */
+    .botao {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid var(--destaque);
+      transition: background .2s, transform .2s;
+    }
+    .botao-principal { background: var(--destaque); color: #fff; }
+    .botao-principal:hover { background: #2563eb; transform: translateY(-2px); }
+    .botao-secundario { color: var(--texto); }
+    .botao-secundario:hover { background: rgba(59, 130, 246, .12); }
+
+    /* =========================================================
+       5. SOBRE MIM
+       ========================================================= */
+    .sobre p { max-width: 65ch; color: var(--texto-suave); margin-bottom: 1rem; }
+
+    /* =========================================================
+       6. HABILIDADES
+       ========================================================= */
+    .habilidades ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+    }
+    .habilidades li {
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-left: 3px solid var(--destaque);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+    }
+    .habilidades li small { display: block; color: var(--texto-suave); }
+
+    /* =========================================================
+       7. PROJETOS
+       Para adicionar um projeto, copie um bloco <article class="card">
+       ========================================================= */
+    .projetos .lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.2rem;
+    }
+    .card {
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 1.5rem;
+      /* Efeito ao passar o mouse nos projetos */
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--destaque);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, .18);
+    }
+    .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+    .card p { color: var(--texto-suave); font-size: 0.97rem; }
+    .card .tecnologias { margin-top: 1rem; color: var(--destaque); font-size: 0.9rem; font-weight: 700; }
+
+    /* =========================================================
+       8. CONTATO
+       ========================================================= */
+    .contato ul { list-style: none; margin-bottom: 2rem; }
+    .contato li { padding: 0.5rem 0; color: var(--texto-suave); }
+    .contato li strong { color: var(--texto); display: inline-block; min-width: 90px; }
+    .contato li a:hover { color: var(--destaque); }
+
+    /* =========================================================
+       9. RODAPÉ
+       ========================================================= */
+    .rodape {
+      border-top: 1px solid var(--borda);
+      padding: 1.8rem 0;
+      text-align: center;
+      color: var(--texto-suave);
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       10. CELULAR (telas pequenas)
+       ========================================================= */
+    @media (max-width: 640px) {
+      .menu ul { gap: 0.9rem; }
+      .menu ul a { font-size: 0.85rem; }
+      .hero { padding: 4rem 0 3rem; }
+      .secao { padding: 3.5rem 0; }
+    }
+
+    /* Respeita quem desativa animações no aparelho */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       MENU: os links levam suavemente até cada seção (pelo id)
+       ========================================================= -->
+  <nav class="menu">
+    <div class="container">
+      <a href="#inicio" class="logo">Augusto M.</a>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       1. CABEÇALHO
+       ========================================================= -->
+  <header class="hero" id="inicio">
+    <div class="container">
+      <h1>Augusto Magalhães</h1>
+      <p class="titulo">Estudante de Análise e Desenvolvimento de Sistemas</p>
+      <p class="descricao">
+        Estou iniciando minha jornada na área de tecnologia, com foco em Banco de Dados,
+        Python e desenvolvimento de sistemas. Busco minha primeira oportunidade para
+        crescer profissionalmente.
+      </p>
+      <div class="botoes">
+        <a href="#projetos" class="botao botao-principal">Ver projetos</a>
+        <a href="#contato" class="botao botao-secundario">Falar comigo</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =======================================================
+         2. SOBRE MIM
+         ======================================================= -->
+    <section class="secao sobre" id="sobre">
+      <div class="container">
+        <h2>Sobre mim</h2>
+        <p>
+          Sou estudante de ADS e estou aprendendo Python, SQL e Banco de Dados.
+          Também estudo Arduino e IoT, e gosto de ver a programação funcionando de verdade,
+          controlando sensores e luzes.
+        </p>
+        <p>
+          Meu interesse é a área de dados e o desenvolvimento back-end.
+          Estou em busca da minha primeira oportunidade na área de TI, onde eu possa
+          aprender com um time e entregar resultado.
+        </p>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         3. HABILIDADES
+         Para adicionar uma habilidade, copie um <li>
+         ======================================================= -->
+    <section class="secao habilidades" id="habilidades">
+      <div class="container">
+        <h2>Habilidades</h2>
+        <ul>
+          <li>Python <small>Básico</small></li>
+          <li>SQL / Banco de Dados <small>MySQL</small></li>
+          <li>Lógica de programação</li>
+          <li>Arduino / IoT <small>Iniciante</small></li>
+          <li>Pacote Office <small>Básico</small></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         4. PROJETOS
+         Cada <article class="card"> é um projeto.
+         Para adicionar outro, copie um card inteiro e edite o texto.
+         ======================================================= -->
+    <section class="secao projetos" id="projetos">
+      <div class="container">
+        <h2>Projetos</h2>
+        <div class="lista">
+
+          <article class="card">
+            <h3>Cadastro de clientes</h3>
+            <p>Sistema em Python com MySQL que cadastra, consulta, atualiza e exclui clientes (CRUD básico).</p>
+            <p class="tecnologias">Python, MySQL</p>
+          </article>
+
+          <article class="card">
+            <h3>Exercícios de lógica</h3>
+            <p>Conjunto de exercícios em Python para praticar condições, laços de repetição e funções.</p>
+            <p class="tecnologias">Python</p>
+          </article>
+
+          <article class="card">
+            <h3>Projetos com Arduino</h3>
+            <p>Montagens simples com sensor de temperatura e LEDs que reagem às leituras.</p>
+            <p class="tecnologias">Arduino, IoT</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         5. CONTATO
+         ======================================================= -->
+    <section class="secao contato" id="contato">
+      <div class="container">
+        <h2>Contato</h2>
+        <ul>
+          <li><strong>Email</strong> <a href="mailto:gustomagalhaes327@gmail.com">gustomagalhaes327@gmail.com</a></li>
+          <li><strong>Telefone</strong> <a href="tel:+5511997516069">(11) 99751-6069</a></li>
+          <!-- LINKEDIN: troque o endereço abaixo se o seu link mudar -->
+          <li><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/augusto-magalh%C3%A3es-2334622b3/" target="_blank" rel="noopener">Ver meu perfil</a></li>
+        </ul>
+
+        <!-- CURRÍCULO: troque o "#" pelo caminho do PDF, ex.: curriculo.pdf -->
+        <a href="#" class="botao botao-principal" id="botao-curriculo" download>Baixar currículo</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       RODAPÉ
+       ========================================================= -->
+  <footer class="rodape">
+    <p>© 2026 Augusto Magalhães</p>
+  </footer>
+
+  <script>
+    /* =========================================================
+       JAVASCRIPT
+       O código abaixo avisa quando o link do currículo ainda
+       não foi configurado, para o botão não parecer quebrado.
+       ========================================================= */
+    var botaoCurriculo = document.getElementById("botao-curriculo");
+
+    botaoCurriculo.addEventListener("click", function (evento) {
+      if (botaoCurriculo.getAttribute("href") === "#") {
+        evento.preventDefault(); // impede de pular para o topo
+        alert("O currículo ainda não foi adicionado. Edite o link no arquivo index.html.");
+      }
+    });
+
+    /* A rolagem suave entre seções já é feita pelo CSS
+       (scroll-behavior: smooth), então não precisa de JS. */
+  </script>
+
+</body>
+</html>
